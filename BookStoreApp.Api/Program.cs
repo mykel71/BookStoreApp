@@ -15,7 +15,10 @@ builder.Host.UseSerilog((context, lc) =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", b => b.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+    options.AddPolicy("AllowAll", b => b
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowAnyOrigin());
 });
 
 var app = builder.Build();
