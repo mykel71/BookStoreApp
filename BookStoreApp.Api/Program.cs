@@ -1,3 +1,5 @@
+using BookStoreApp.Api.Data;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
 builder.Host.UseSerilog((context, lc) => 
     lc.WriteTo.Console().ReadFrom.Configuration(context.Configuration));
